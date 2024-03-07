@@ -1,8 +1,11 @@
 import React from 'react'
-
+import TaskForm from "../components/TaskForm"
 const TaskList = () => {
   return (
-    <div>TaskList</div>
+    <div>
+      <h2>Task Manager</h2>
+      <TaskForm /></div>
+
   )
 }
 
