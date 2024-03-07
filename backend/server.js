@@ -25,7 +25,7 @@ const startServer = async () => {
 //Middle ware
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(taskRouter)
+app.use("/api/tasks",taskRouter)
 
 // const logger =(req,res,next)=>{
 //     console.log("Middleware ran")

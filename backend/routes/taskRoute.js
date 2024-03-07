@@ -1,15 +1,24 @@
 const express = require("express")
 const TaskManagerhds = require("../models/taskModel")
-const { createTask, getTasks, getTask } = require("../controllers/taskControllers")
+const { createTask, getTasks, getTask, deleteTask, updateTask } = require("../controllers/taskControllers")
 const router = express.Router()
 
 //Post tasks
-router.post("/api/tasks", createTask)
+router.post("/", createTask)
 
 //Get tasks
-router.get("/api/tasks", getTasks)
+router.get("/", getTasks)
 
 //get single task
-router.get("/api/tasks/:id",getTask)
+router.get("/:id",getTask)
+
+//delete a task
+router.delete("/:id",deleteTask);
+
+//Update method
+router.put("/:id",updateTask)
+
+//Patch Method
+router.patch("/:id",updateTask)
 
 module.exports = router;
