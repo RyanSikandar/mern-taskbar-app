@@ -37,6 +37,7 @@ const TaskList = () => {
       await axios.post(`${URL}/api/tasks`, formData)
       toast.success("Task added successfully")
       setFormData({ ...formData, name: "" })
+      getTasks()
     }
     catch (error) {
       toast.error(error.message);
@@ -81,7 +82,7 @@ const TaskList = () => {
 
   const setToComplete = async (task) => {
     const newFormData = {
-      name:task.name, completed: true
+      name: task.name, completed: true
     }
     try {
       await axios.put(`${URL}/api/tasks/${task._id}`, newFormData)
@@ -103,18 +104,27 @@ const TaskList = () => {
       toast.error(e.message)
     }
   }
+
+  useEffect(() => {
+    const cTask = tasks.filter((task) => {
+      return task.completed === true
+    })
+    setCompletedTasks(cTask)
+  }, [tasks])
+
   return (
     <div>
       <h2>Task Manager</h2>
       <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEditing={isEditing} updateTask={updateTask} />
-      <div className="--flex-between --pb">
+      {tasks.length > 0 && (<div className="--flex-between --pb">
         <p>
-          <b>Total Task:</b> 0
+          <b>Total Task:</b> {tasks.length}
         </p>
         <p>
-          <b>Completed Task:</b> 0
+          <b>Completed Task:</b> {completedTasks.length}
         </p>
-      </div>
+      </div>)}
+
       <hr />
       {
         isLoading && (
@@ -131,7 +141,7 @@ const TaskList = () => {
           <div>
             {
               tasks.map((task, index) => {
-                return <Task key={task._id} task={task} index={index} deleteTask={deleteTask} getSingleTask={getSingleTask} setToComplete={setToComplete}/>
+                return <Task key={task._id} task={task} index={index} deleteTask={deleteTask} getSingleTask={getSingleTask} setToComplete={setToComplete} />
               })
             }</div>
         )
