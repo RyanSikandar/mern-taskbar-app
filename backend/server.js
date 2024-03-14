@@ -27,7 +27,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 //as the front end is on local host 3000 and the backend on 5000, we use this and added before the route 
-app.use(cors())
+app.use(cors(
+{origin:["http://localhost:3000/","mern-task"]}
+))
 
 app.use("/api/tasks", taskRouter)
 
