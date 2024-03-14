@@ -1,8 +1,20 @@
-import React from 'react'
-
-const Task = () => {
+import React, { useState } from 'react'
+import { FaCheckDouble, FaEdit, FaRegTrashAlt, FaSmileWink } from "react-icons/fa";
+const Task = ({ task, index ,deleteTask}) => {
   return (
-    <div>Task</div>
+
+    <div className='task'>
+      <p>
+        <b>{index + 1}.</b>
+        {task.name}.
+      </p>
+      <div className='task-icons'>
+        <FaCheckDouble color='green' />
+        <FaEdit color='purple' />
+        <FaRegTrashAlt color='red' onClick={()=>deleteTask(task._id)}/>
+
+      </div>
+    </div>
   )
 }
 
